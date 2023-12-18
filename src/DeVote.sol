@@ -37,15 +37,17 @@ abstract contract DeVote is Ownable {
         _pollStruct.EndsAt = _pollEnd;
     }
 
-    function _CandidateCreation(
+    function _candidateCreation(
         uint _partyId,
         string memory _partyName,
-        bytes32 _partyLogo
+        string memory _partyLogo
     ) external onlyOwner {
+        bytes32 partyLogo = bytes32(abi.encodePacked(_partyLogo));
+        // string memory reversedInput = string(abi.encodePacked(output))
         Candidate memory newCandidate;
         newCandidate.PartyId = _partyId;
         newCandidate.PartyName = _partyName;
-        newCandidate.PartyLogo = _partyLogo;
+        newCandidate.PartyLogo = partyLogo;
         newCandidate.PartyVotes = 0;
 
         _candidates.push(newCandidate);
